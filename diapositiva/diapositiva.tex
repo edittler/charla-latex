@@ -2,6 +2,8 @@
 
 \usepackage[utf8]{inputenc} % Indica cuál es la codificación de este archivo
 \usepackage[spanish]{babel} % Indica el idioma en que está escrito el documento
+\usepackage{fancybox}
+\usepackage{graphicx}
 \usepackage{amssymb} % Fuentes y símbolos adicionales (por AMS)
 \usepackage{amsmath} % Mejoras a entornos matemáticos y extras (por AMS)
 \usepackage{mathtools} % Correcciones a amsmath y funcionalidades extras
@@ -10,9 +12,9 @@
 
 \lstset{ % Defino el formato de bloques de código fuente
   inputencoding=utf8, % Indico la codificación de los archivos de entrada
-  extendedchars=true, % Extiendo los caracteres
+  %extendedchars=true, % Extiendo los caracteres
   % Escapeo caracteres especiales
-  literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ñ}{{\~n}}1,
+  literate={¡}{{!`}}1 {¿}{{?`}}1 {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ñ}{{\~n}}1,
   showstringspaces=false, % Indica si muestra los espacios dentro de strings
   numbers=left, % Posición en que se muestran los números de línea
   numberstyle=\tiny\color{gray}, % Estilo de los números de línea
@@ -32,14 +34,33 @@
 
 \usepackage{hyperref}
 
-\title{Cómo hacer informes con \LaTeX}
-\subtitle{Y subir la nota de los trabajos prácticos}
+% Beamer settings
+
+\beamertemplatenavigationsymbolsempty
+
+\AtBeginSection[]{
+  \begin{frame}
+    \vfill
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+      \usebeamerfont{title}\insertsectionhead\par%
+    \end{beamercolorbox}
+    \vfill
+  \end{frame}
+}
+
+% Document Properties
+
+\title{Herramientas libres para crear documentos de alta calidad}
+\subtitle{Algo de {\LaTeX} y Markdown}
 \author{Ezequiel ``Pampa'' Pérez Dittler}
 \date{Semana LUGFI, Agosto de 2016}
 
 \begin{document}
 
 \frame{\titlepage}
+
+\section{LUGFI}
 
 \begin{frame}
   \frametitle{¿Qué es LUGFI?}
@@ -50,6 +71,8 @@
 
   LUGFI Usa GNU/Linux en la Facultad de Ingeniería
 \end{frame}
+
+\section{Un poco de \LaTeX}
 
 \begin{frame}
   \frametitle{¿Qué es \LaTeX?}
@@ -112,10 +135,57 @@
       \lstinputlisting[style=latex]{hola-mundo/hola-mundo.tex}
     \column{0.5\textwidth}\centering
       Resultado\\[.2cm]
+      \shadowbox{\includegraphics[height=0.8\textheight]{hola-mundo/hola-mundo.pdf}}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Estructura del documento}
+  \begin{columns} 
+    \column{0.5\textwidth}\centering
+      \lstinputlisting[style=latex]{estructura/estructura.tex}
+    \column{0.5\textwidth}\centering
       \begin{itemize}
-        \item 1
-        \item 2
+        \item Preámbulo
+        \begin{itemize}
+          \item Inclusión y configuración de paquetes
+          \item Configuración del documento
+          \item Propiedades del documento
+        \end{itemize}
+        \item Contenido del documento
+        \item Fin del documento
+        \begin{itemize}
+          \item Todo lo que se inserte aquí no tendrá efecto alguno tanto en la configuración como en el contenido
+        \end{itemize}
       \end{itemize}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{La codificación del caracteres del siglo XXI es: UTF-8}
+  \begin{columns} 
+    \column{0.5\textwidth}\centering
+      \lstinputlisting[style=latex]{hola-mundo-utf/hola-mundo.tex}
+    \column{0.5\textwidth}\centering
+      Resultado\\[.2cm]
+      \shadowbox{\includegraphics[height=0.7\textheight]{hola-mundo-utf/hola-mundo.pdf}}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{¿La fuente debe ser de 12pt? ¿Hoja A4?}
+  \centering
+  \lstinputlisting[style=latex]{tamanios/hola-mundo.tex}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Ordenando en secciones}
+  \begin{columns} 
+    \column{0.6\textwidth}\centering
+      \lstinputlisting[style=latex]{secciones/secciones.tex}
+    \column{0.4\textwidth}\centering
+      Resultado\\[.2cm]
+      \shadowbox{\includegraphics[height=0.7\textheight]{secciones/secciones.pdf}}
   \end{columns}
 \end{frame}
 
