@@ -21,7 +21,7 @@
   breaklines=true, % Se parten las líneas que exceden del ancho del documento
   frame=single, % Formato del marco del entorno
   backgroundcolor=\color{gray!5}, % Color de fondo
-  basicstyle=\ttfamily\footnotesize, % Estilo de base (familia, tamaño, color)
+  basicstyle=\ttfamily\scriptsize, % Estilo de base (familia, tamaño, color)
 }
 
 \lstdefinestyle{latex}{
@@ -88,7 +88,11 @@
 \begin{frame}
   \frametitle{¿Por qué usar \LaTeX?}
   \begin{itemize}
-    \item Formato de archivo estables (en Word existen .doc y .docx)
+    \item Formatos estables y compatibles
+    \begin{itemize}
+      \item En Word existen .doc y .docx, incompatibles entre sí
+      \item Incluso si se utilizan distintas versiones de Word
+    \end{itemize}
     \item Fórmulas matemáticas de alta calidad
     \item Extensible con multitud de paquetes
     \item Permite centrarse en el contenido, no en la presentación
@@ -129,22 +133,15 @@
 
 \begin{frame}
   \frametitle{¡Hola Mundo!}
-  \begin{columns} 
-    \column{0.5\textwidth}\centering
-      Código\\[.2cm]
-      \lstinputlisting[style=latex]{hola-mundo/hola-mundo.tex}
-    \column{0.5\textwidth}\centering
-      Resultado\\[.2cm]
-      \shadowbox{\includegraphics[height=0.8\textheight]{hola-mundo/hola-mundo.pdf}}
-  \end{columns}
+  \lstinputlisting[style=latex]{hola-mundo/hola-mundo.tex}
 \end{frame}
 
 \begin{frame}
   \frametitle{Estructura del documento}
-  \begin{columns} 
-    \column{0.5\textwidth}\centering
+  \begin{columns}
+    \column{0.45\textwidth}\centering
       \lstinputlisting[style=latex]{estructura/estructura.tex}
-    \column{0.5\textwidth}\centering
+    \column{0.55\textwidth}\centering
       \begin{itemize}
         \item Preámbulo
         \begin{itemize}
@@ -162,31 +159,86 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{La codificación del caracteres del siglo XXI es: UTF-8}
-  \begin{columns} 
-    \column{0.5\textwidth}\centering
+  \frametitle{La codificación del caracteres del siglo XXI es... UTF-8!}
+  \begin{columns}
+    \column{0.45\textwidth}\centering
       \lstinputlisting[style=latex]{hola-mundo-utf/hola-mundo.tex}
-    \column{0.5\textwidth}\centering
-      Resultado\\[.2cm]
-      \shadowbox{\includegraphics[height=0.7\textheight]{hola-mundo-utf/hola-mundo.pdf}}
+    \column{0.55\textwidth}\centering
+      \begin{itemize}
+        \item Se incluyó el paquete \texttt{inputenc}
+        \item Permite especificar la codificación del archivo fuente
+        \item La opción \texttt{utf8} indica que la codificación es UTF-8
+      \end{itemize}
   \end{columns}
 \end{frame}
 
 \begin{frame}
-  \frametitle{¿La fuente debe ser de 12pt? ¿Hoja A4?}
+  \frametitle{¿La fuente debe ser de 12pt? ¿Hoja A4? ¿Tipo libro?}
   \centering
   \lstinputlisting[style=latex]{tamanios/hola-mundo.tex}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Ordenando en secciones}
-  \begin{columns} 
-    \column{0.6\textwidth}\centering
-      \lstinputlisting[style=latex]{secciones/secciones.tex}
-    \column{0.4\textwidth}\centering
-      Resultado\\[.2cm]
-      \shadowbox{\includegraphics[height=0.7\textheight]{secciones/secciones.pdf}}
+  \frametitle{Más opciones para personalizar}
+  \begin{columns}
+    \column{0.45\textwidth}\centering
+      Clases\\[.2cm]
+      \begin{itemize}
+        \item article
+        \item book
+        \item beamer
+        \item IEEEtran
+        \item exam
+        \item y varios más...
+      \end{itemize}
+    \column{0.55\textwidth}\centering
+      Opciones\\[.2cm]
+      \begin{itemize}
+        \item 10pt,11pt,12pt,. . .
+        \item a4paper,letterpaper,b5paper,. . .
+        \item twoside, oneside
+        \item landscape
+        \item onecolumn, twocolumn
+        \item draft
+        \item y varios más...
+      \end{itemize}
   \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Ordenando en secciones}
+  \lstinputlisting[style=latex]{secciones/secciones.tex}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Agregando índices}
+  \begin{itemize}
+    \item \texttt{\textbackslash{}tableofcontents}
+    \item \texttt{\textbackslash{}listoffigures}
+    \item \texttt{\textbackslash{}listoftables}
+    \item y algunos más...
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{¿Que tal una carátula?}
+  \lstinputlisting[style=latex]{caratula/hola-mundo.tex}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{¡Los títulos de índices y las fechas se ven en inglés!}
+  \framesubtitle{El paquete \texttt{babel} viene al rescate}
+
+  \begin{lstlisting}[style=latex]
+\usepackage[spanish]{babel}
+  \end{lstlisting}
+
+  \begin{itemize}
+    \item El paquete \texttt{babel} traduce titulos, fechas
+    \item Habilita la separación silábica en el idioma indicado
+    \item La opción \texttt{spanish} indica que el idioma del documento es el español
+    \item Para usar \texttt{babel} o indicar idiomas puede requerir instalar paquetes en la distribución \LaTeX
+  \end{itemize}
 \end{frame}
 
 \end{document}
