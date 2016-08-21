@@ -5,6 +5,13 @@
 \usepackage[utf8]{inputenc} % Indica cuál es la codificación de este archivo
 \usepackage[spanish]{babel} % Indica el idioma en que está escrito el documento
 \usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\definecolor{bblue}{HTML}{4F81BD}
+\definecolor{rred}{HTML}{C0504D}
+\definecolor{ggreen}{HTML}{9BBB59}
+\definecolor{ppurple}{HTML}{9F4C7C}
 \usepackage{amssymb} % Fuentes y símbolos adicionales (por AMS)
 \usepackage{amsmath} % Mejoras a entornos matemáticos y extras (por AMS)
 \usepackage{mathtools} % Correcciones a amsmath y funcionalidades extras
@@ -15,7 +22,7 @@
   inputencoding=utf8, % Indico la codificación de los archivos de entrada
   %extendedchars=true, % Extiendo los caracteres
   % Escapeo caracteres especiales
-  literate={¡}{{!`}}1 {¿}{{?`}}1 {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ñ}{{\~n}}1,
+  literate={`}{{\`{}}}1 {¡}{{!`}}1 {¿}{{?`}}1 {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ñ}{{\~n}}1,
   showstringspaces=false, % Indica si muestra los espacios dentro de strings
   numbers=left, % Posición en que se muestran los números de línea
   numberstyle=\tiny\color{gray}, % Estilo de los números de línea
@@ -31,6 +38,10 @@
   keywordstyle=\color{DarkGreen}, % Estilo de las palabras reservadas
   stringstyle=\color{DarkBlue}, % Estilo de los strings
   commentstyle=\color{DarkGray}, % Estilo de los comentarios
+}
+
+\lstdefinestyle{md}{
+  numbers=none
 }
 
 \usepackage{hyperref}
@@ -352,6 +363,56 @@
   \end{figure}
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{Tikz}
+  \framesubtitle{Gráfico de funciones}
+    \begin{center}
+      \begin{tikzpicture}[domain=0:4]
+        \draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
+        \draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$};
+        \draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};
+        \draw[color=red]
+        plot (\x,\x)
+        node[right] {$f(x) =x$};
+        % \x r means to convert ’\x’ from degrees to _r_adians:
+        \draw[color=blue]
+        plot (\x,{sin(\x r)})
+        node[right] {$f(x) = \sin x$};
+        \draw[color=orange] plot (\x,{0.05*exp(\x)}) node[right] {$f(x) = \frac{1}{20} \mathrm e^x$};
+      \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+%\begin{frame}
+%  \frametitle{PGF Plots}
+%  \framesubtitle{Gráfico de barras}
+%  \begin{tikzpicture}
+%    \begin{axis}[
+%      x tick label style={/pgf/number format/1000 sep=},
+%      ylabel=Population,
+%      enlargelimits=0.1,
+%      legend style={
+%        at={(0.5,-0.15)},
+%        anchor=north,
+%        legend columns=-1},
+%      ybar,
+%      bar width=7pt,
+%    ]
+%      \addplot coordinates{(1930,50e5) (1940,33e5) (1950,40e5) (1960,50e5) (1970,70e5)};
+%      \addplot coordinates {(1930,38e5) (1940,42e5) (1950,43e5) (1960,45e5) (1970,65e5)};
+%      \addplot coordinates {(1930,15e5) (1940,12e5) (1950,13e5) (1960,25e5) (1970,35e5)};
+%      \addplot[
+%        red,
+%        line legend,
+%        sharp plot,
+%        update limits=false
+%      ] coordinates {(1910,4.3e6) (1990,4.3e6)}
+%      node[above] at (1950,4.3e6) {Houses};
+%      \legend {Far,Near,Here,Annot}
+%    \end{axis}
+%  \end{tikzpicture}
+%\end{frame}
+
 \subsection{Código}
 
 \begin{frame}
@@ -439,6 +500,150 @@
 
 \section{Markdown}
 
+\subsection{Introducción}
+
+\begin{frame}
+  \frametitle{¿Qué es Markdown?}
+  \begin{itemize}
+    \item Es un lenguaje de marcado ligero
+    \item Inspirado en convenciones existentes marcar mensajes de correo electrónico usando texto plano
+    \item El texto markdown se convierte a HTML en las herramientas más populares
+  \end{itemize}\pause
+\end{frame}
+
+\begin{frame}
+  \frametitle{¿Por qué usar Markdown?}
+  \begin{itemize}
+    \item El marcado es sencillo de aprender y usar
+    \item Los caracteres de marcado son poco intrusivo
+    \item Es utilizado en muchas plataformas
+    \begin{itemize}
+      \item GitHub, GitLab
+      \item Foros
+      \item Mensajería instantánea (por ejemplo, Slack)
+      \item Aplicaciones de notas
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{¿Cómo usar Markdown?}
+  Aplicaciones de escritorio:
+  \begin{itemize}
+    \item Editor de texto plano favorito
+    \item Editor Atom (incluye previsualización)
+    \item Otros editores con plugin de previsualización
+  \end{itemize}
+  \vfill
+  Servicios en línea:
+  \begin{itemize}
+    \item Dillinger (dillinger.io)
+    \item Multitud de editores disponible
+  \end{itemize}
+\end{frame}
+
+\subsection{Sintaxis básica}
+
+\begin{frame}[fragile]
+  \frametitle{Encabezados}
+  \begin{lstlisting}[style=md]
+# Encabezado 1
+## Encabezado 2
+### Encabezado 3
+#### Encabezado 4
+##### Encabezado 5
+###### Encabezado 6
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Formato de texto}
+  \begin{lstlisting}[style=md]
+Italica, con *asteriscos* o _guines bajos_.
+
+Negrita, con doble **asteriscos** o __guiones bajos__.
+
+Combinados con **asteriscos y _guiones bajos_**.
+
+~~Texto tachado~~
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Listas}
+  \begin{columns}
+    \column{0.45\textwidth}
+      Simple
+      \begin{lstlisting}[style=md]
+* Item 1
+* Item 2
+* Item 3
+      \end{lstlisting}\pause
+    \column{0.45\textwidth}
+      Numerada
+      \begin{lstlisting}[style=md]
+1. Item 1
+2. Item 2
+3. Item 3
+      \end{lstlisting}
+  \end{columns}\pause
+  \vfill
+  Listas anidadas (2 espacios en cada nivel)
+    \begin{lstlisting}[style=md]
+1. Item 1
+
+  * Sub item 1
+  * Sub item 2
+
+2. Item 2
+3. Item 3
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Enlaces}
+  \begin{lstlisting}[style=md]
+[texto](url)
+  \end{lstlisting}\pause
+  \vfill
+  La inclusión de imágenes son un caso especial de enlaces.
+
+  Poseen un signo de exclamación como prefijo.
+
+  \begin{lstlisting}[style=md]
+![alt text](url)
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Código}
+  \begin{columns}
+    \column{0.45\textwidth}
+    En línea (junto con el texto)
+    \begin{lstlisting}[style=md]
+texto y `código`
+    \end{lstlisting}\pause
+    \column{0.45\textwidth}
+    En bloque separado
+    \begin{lstlisting}[style=md]
+```
+código
+```
+    \end{lstlisting}\pause
+  \end{columns}\pause
+  \vfill
+  Con resaltado de sintaxis
+  \begin{lstlisting}[style=md]
+```python
+código
+```
+
+```suby
+código
+```
+  \end{lstlisting}
+\end{frame}
+
 \section{Markdown \& \LaTeX}
 \subsection{Ventajas y desventajas}
 \begin{frame}
@@ -449,6 +654,9 @@
     \item Que el diseño lo haga otro (en este caso, \LaTeX)
     \item Usar lenguaje específico (matemáticas, código, etc.)
   \end{itemize}\pause
+
+  \vfill
+
   No sirve tanto si:
   \begin{itemize}
     \item Se tiene poco tiempo para aprender (último día de TP)
@@ -466,8 +674,11 @@
       \item Mails
       \item Documentación web
     \end{itemize}
-    \item Editar en varias plataformas (web, móvil) 
+    \item Editar en varias plataformas (web, móvil)
   \end{itemize}\pause
+
+  \vfill
+
   No sirve tanto si:
   \begin{itemize}
     \item El documento incluye gráficos, fórmulas matemáticas
@@ -483,10 +694,12 @@
     \item Escribimos rápido y usamos \texttt{markdown}
     \item Damos un estilo profesional con \LaTeX
   \end{enumerate}\pause
+  \vfill
   \begin{enumerate}
     \item Tenemos un documento elaborado con \LaTeX
     \item Lo convertimos a \texttt{markdown} para subirlo, por ejemplo, a la web
   \end{enumerate}\pause
+  \vfill
   Para lograr esto, usamos la herramienta \textbf{Pandoc}
 \end{frame}
 
