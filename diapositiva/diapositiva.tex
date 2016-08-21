@@ -290,8 +290,8 @@
     \item Sintáxis específica
     \item Sólo hay que indicar que vamos a escribir fórmulas
     \begin{itemize}
-     \item inline (junto con texto)
-     \item en una nueva línea
+      \item inline (junto con texto)
+      \item en una nueva línea
     \end{itemize}
    \end{itemize}
 \end{frame}
@@ -355,14 +355,20 @@
 \subsection{Código}
 
 \begin{frame}
-  \frametitle{Ventajas}
+  \frametitle{Escribir código}
+  En un procesador de texto: 
   \begin{itemize}
-   \item Formato agradable a la vista
-   \begin{itemize}
-    \item Syntax highlighting
-    \item Personalización de estilos (números de líneas, colores)
-   \end{itemize}
-   \item ¡Posibilidad de importar código fuente desde otros archivos!
+    \item \texttt{ctrl+C ctrl+V} y cruzamos los dedos
+    \item Después damos formato
+  \end{itemize}\pause
+  En \LaTeX:
+  \begin{itemize}
+    \item Formato agradable a la vista
+    \begin{itemize}
+      \item Syntax highlighting
+      \item Personalización de estilos (números de líneas, colores)
+    \end{itemize}
+    \item ¡Posibilidad de importar código fuente desde otros archivos!
   \end{itemize}
 \end{frame}
 
@@ -409,13 +415,13 @@
   \vfill
 
   Da como resultado:
-\begin{lstlisting}[language=python]
+  \begin{lstlisting}[language=python]
   def main():
     """Saluda al mundo"""
     print("Hola mundo")
   
   main()
-\end{lstlisting}
+  \end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -433,8 +439,77 @@
 
 \section{Markdown}
 
+\section{Markdown \& \LaTeX}
+\subsection{Ventajas y desventajas}
+\begin{frame}
+  \frametitle{\LaTeX}
+  Sirve cuando necesitamos:
+  \begin{itemize}
+    \item Calidad tipográfica
+    \item Que el diseño lo haga otro (en este caso, \LaTeX)
+    \item Usar lenguaje específico (matemáticas, código, etc.)
+  \end{itemize}\pause
+  No sirve tanto si:
+  \begin{itemize}
+    \item Se tiene poco tiempo para aprender (último día de TP)
+    \item Queremos trabajar sobre documentos existentes
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Markdown}
+  Sirve para:
+  \begin{itemize}
+    \item Escribir documentos con formato sencillo
+    \begin{itemize}
+      \item Notas
+      \item Mails
+      \item Documentación web
+    \end{itemize}
+    \item Editar en varias plataformas (web, móvil) 
+  \end{itemize}\pause
+  No sirve tanto si:
+  \begin{itemize}
+    \item El documento incluye gráficos, fórmulas matemáticas
+    \item Se quiere dar estilos propios al documento rápidamente
+  \end{itemize}
+\end{frame}
+
+\subsection{Compatibilidad}
+
+\begin{frame}
+  \frametitle{No son excluyentes!}
+  \begin{enumerate}
+    \item Escribimos rápido y usamos \texttt{markdown}
+    \item Damos un estilo profesional con \LaTeX
+  \end{enumerate}\pause
+  \begin{enumerate}
+    \item Tenemos un documento elaborado con \LaTeX
+    \item Lo convertimos a \texttt{markdown} para subirlo, por ejemplo, a la web
+  \end{enumerate}\pause
+  Para lograr esto, usamos la herramienta \textbf{Pandoc}
+\end{frame}
 
 \section{Pandoc}
+
+\begin{frame}
+  \frametitle{La herramienta para conversión entre markups}
+  \textbf{Pandoc} que permite convertir entre:
+  \begin{itemize}
+   \item \texttt{.md} (Markdown)
+   \item \texttt{.tex} (\LaTeX)
+   \item \texttt{.html}
+   \item *Wiki
+   \item \texttt{.epub} (e-books)
+   \item muchos más...
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{La herramienta para conversión entre markups}
+  \emph{Realmente muchos más}
+  \includegraphics[width=1\textwidth]{graficos/pandoc}
+\end{frame}
 
 
 \end{document}
