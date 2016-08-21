@@ -1,9 +1,9 @@
 \documentclass[svgnames]{beamer}
-\usetheme{Warsaw} % descomentar para cambiar el tema
+\usetheme{JuanLesPins} % descomentar para cambiar el tema
+%\usecolortheme{beaver}
 
 \usepackage[utf8]{inputenc} % Indica cuál es la codificación de este archivo
 \usepackage[spanish]{babel} % Indica el idioma en que está escrito el documento
-\usepackage{fancybox}
 \usepackage{graphicx}
 \usepackage{amssymb} % Fuentes y símbolos adicionales (por AMS)
 \usepackage{amsmath} % Mejoras a entornos matemáticos y extras (por AMS)
@@ -43,8 +43,30 @@
   \begin{frame}
     \vfill
     \centering
-    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \begin{beamercolorbox}[
+      sep=8pt,
+      center,
+      shadow=true,
+      rounded=true
+    ]{title}
       \usebeamerfont{title}\insertsectionhead\par%
+    \end{beamercolorbox}
+    \vfill
+  \end{frame}
+}
+
+\AtBeginSubsection[]{
+  \begin{frame}
+    \vfill
+    \centering
+    \begin{beamercolorbox}[
+      sep=8pt,
+      center,
+      shadow=true,
+      rounded=true
+    ]{title}
+      %\usebeamerfont{title}\insertsectionhead\par%
+      \usebeamerfont{subtitle}\insertsubsectionhead\par%
     \end{beamercolorbox}
     \vfill
   \end{frame}
@@ -54,7 +76,7 @@
 
 \title{Herramientas libres para crear documentos de alta calidad}
 \subtitle{Algo de {\LaTeX} y Markdown}
-\author{Ezequiel ``Pampa'' Pérez Dittler}
+\author{Ezequiel Pérez Dittler \and Lucas Perea}
 \date{Semana LUGFI, Agosto de 2016}
 
 \begin{document}
@@ -66,14 +88,20 @@
 \begin{frame}
   \frametitle{¿Qué es LUGFI?}
 
+  \centering
+
   Es el grupo de usuarios y desarrolladores de software libre y abierto de la Facultad de Ingeniería de la UBA
 
-  Acrónimo recursivo:
+  \vfill
+
+  \textbf{Acrónimo recursivo}
+
+  \medskip
 
   LUGFI Usa GNU/Linux en la Facultad de Ingeniería
 \end{frame}
 
-\section{Introducción a \LaTeX}
+\section{\LaTeX}
 
 \begin{frame}
   \frametitle{¿Qué es \LaTeX?}
@@ -92,9 +120,9 @@
     \item Control flexible del contenido
     \item Fórmulas matemáticas de alta calidad
     \item Permite centrarse en el contenido, no en la presentación
-    \item Extensible con multitud de paquetes
+    \item Extensible con paquetes
     \begin{itemize}
-      \item La presentación se puede cambiar con multitud de plantillas
+      \item La presentación se puede cambiar con plantillas
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -104,10 +132,11 @@
   \begin{itemize}
     \item Trabajos prácticos
     \item Documentos con fórmulas matemáticas
-    \item Tesis, papers
+    \item Documentación de código o software
+    \item Tesis, artículos científicos
     \item Currículum Vitae
     \item Presentaciones
-    \item Partituras (!)
+    \item Partituras musicales
   \end{itemize}
 \end{frame}
 
@@ -120,6 +149,8 @@
     \item Windows: MiKTeX
     \item OSX (Mac): MacTex
   \end{itemize}
+
+  \vfill
 
   Editor de texto
   \begin{itemize}
@@ -139,8 +170,6 @@
     \item ShareLaTeX: www.sharelatex.com
   \end{itemize}
 \end{frame}
-
-\section{Uso de \LaTeX}
 
 \subsection{Conceptos básicos}
 \begin{frame}
@@ -254,6 +283,7 @@
 \end{frame}
 
 \subsection{Fórmulas matemáticas}
+
 \begin{frame}
   \frametitle{Escribiendo fórmulas matemáticas}
   \begin{itemize}
@@ -267,37 +297,60 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Fórmulas matemáticas: Ejemplos}
+  \frametitle{Ejemplo}
   \only<1> {\lstinputlisting[style=latex]{matematicas/matematicas.tex}}
-  \only<2> {Sean $ \alpha, \beta \in \mathbb{R} $\begin{equation*} \alpha + \beta = \beta + \alpha\end{equation*} }      
+  \only<2> {Sean $ \alpha, \beta \in \mathbb{R} $\begin{equation*} \alpha + \beta = \beta + \alpha\end{equation*} }
 \end{frame}
 
 \begin{frame}
-  \frametitle{Fórmulas matemáticas: Ejemplos}
+  \frametitle{Más ejemplos}
   Sumatorias
   {\lstinputlisting[style=latex]{matematicas/sumatoria.tex}}
   \begin{center}
-    $\sum_{i=0}^{n} a_ix^i$   
+    $\sum_{i=0}^{n} a_ix^i$
   \end{center}\pause
   Integrales
   {\lstinputlisting[style=latex]{matematicas/integral.tex}}
   \begin{center}
-    $\int_{a}^{b} x^2 dx$   
+    $\int_{a}^{b} x^2 dx$
   \end{center}\pause
   Límites
   {\lstinputlisting[style=latex]{matematicas/limite.tex}}
   \begin{center}
-    $\lim_{x\to\infty} f(x)$  
-  \end{center}\pause
-
+    $\lim_{x\to\infty} f(x)$
+  \end{center}
 \end{frame}
 
 \subsection{Gráficos}
 
-\begin{frame}
-  \frametitle{}
+\begin{frame}[fragile]
+  \frametitle{Importar gráficos}
+  \begin{columns}
+    \column{0.5\textwidth}\centering
+      \lstinputlisting[style=latex]{graficos/documento-include.tex}
+    \column{0.5\textwidth}\centering
+      \begin{itemize}
+        \item Se incluyó el paquete \texttt{graphicx}
+        \item El entorno \texttt{figura}
+        \begin{itemize}
+            \item Se importa la imagen con \texttt{includegraphics}
+            \item Opcionalmente se puede agregar un subtítulo (\texttt{caption})
+            \item Opcionalmente se puede agregar una etiqueta de referencia (\texttt{label})
+        \end{itemize}
+      \end{itemize}
+  \end{columns}
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{Importar gráficos}
+  \framesubtitle{Ejemplo}
+  \lstinputlisting[style=latex]{graficos/include.tex}
+  \begin{figure}
+    \includegraphics[width=0.3\textwidth]{graficos/logo_uba}
+    \caption{Logo UBA}
+    \label{fig:logo_uba}
+  \end{figure}
+\end{frame}
 
 \subsection{Código}
 
@@ -339,17 +392,28 @@
   \frametitle{Incluyendo código en el documento}
   \framesubtitle{Uso básico}
   \lstinputlisting[style=latex, firstline=13, lastline=15]{codigo/importar-listings.tex}
+
+  \vfill
+
   Da como resultado:
   \begin{lstlisting}
   print("Hola mundo!")
   \end{lstlisting}\pause
-  \emph{¡Lo estuvimos usando todo el tiempo!}
+
+  \vfill
+
+  \begin{center}
+    \emph{¡Lo estuvimos usando todo el tiempo!}
+  \end{center}
 \end{frame}
 
 \begin{frame}[fragile]
   \frametitle{Incluyendo código en el documento}
   \framesubtitle{Personalizando un poco más}
   \lstinputlisting[style=latex, firstline=17, lastline=23]{codigo/importar-listings.tex}
+
+  \vfill
+
   Da como resultado:
   \begin{lstlisting}[language=python]
   def main():
@@ -365,6 +429,9 @@
   \framesubtitle{Importando un archivo con código}
   Indicamos el nombre del archivo a mostrar:
   \lstinputlisting[style=latex, firstline=25, lastline=25]{codigo/importar-listings.tex}\pause
+
+  \vfill
+
   Podemos incluir sólo algunas líneas:
   \lstinputlisting[style=latex, firstline=26, lastline=26]{codigo/importar-listings.tex}
 
@@ -420,16 +487,29 @@
     \item Tenemos un documento elaborado con \LaTeX
     \item Lo convertimos a \texttt{markdown} para subirlo, por ejemplo, a la web
   \end{enumerate}\pause
-  Para lograr esto, usamos la herramienta \textbf{Pandoc} que permite convertir entre:
+  Para lograr esto, usamos la herramienta \textbf{Pandoc}
+\end{frame}
+
+\section{Pandoc}
+
+\begin{frame}
+  \frametitle{La herramienta para conversión entre markups}
+  \textbf{Pandoc} que permite convertir entre:
   \begin{itemize}
    \item \texttt{.md} (Markdown)
    \item \texttt{.tex} (\LaTeX)
-   \item otros más (\texttt{.tex}, \texttt{.odt})
+   \item \texttt{.html}
+   \item *Wiki
+   \item \texttt{.epub} (e-books)
+   \item muchos más...
   \end{itemize}
-
 \end{frame}
 
-\section{Conclusiones}
+\begin{frame}
+  \frametitle{La herramienta para conversión entre markups}
+  \emph{Realmente muchos más}
+  \includegraphics[width=1\textwidth]{graficos/pandoc}
+\end{frame}
 
 
 \end{document}
