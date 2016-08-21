@@ -1,0 +1,29 @@
+\usepackage{listings}
+\usepackage{color}
+
+\lstset{
+  tabsize=4,
+  keywordstyle=\color{DarkGreen},
+  stringstyle=\color{DarkBlue},
+  commentstyle=\color{DarkGray},
+} 
+
+\begin{document}
+
+\begin{lstlisting}
+  print("Hola mundo!")
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+  def main():
+    """Saluda al mundo"""
+    print("Hola mundo")
+  
+  main()
+\end{lstlisting}
+
+\lstinputlisting[language=Python]{holamundo.py}
+\lstinputlisting[language=Python, firstline=1, lastline=15]{holamundo.py}
+
+\end{document}
+

@@ -1,4 +1,5 @@
 \documentclass[svgnames]{beamer}
+\usetheme{Warsaw} % descomentar para cambiar el tema
 
 \usepackage[utf8]{inputenc} % Indica cuál es la codificación de este archivo
 \usepackage[spanish]{babel} % Indica el idioma en que está escrito el documento
@@ -72,7 +73,7 @@
   LUGFI Usa GNU/Linux en la Facultad de Ingeniería
 \end{frame}
 
-\section{Un poco de \LaTeX}
+\section{Introducción a \LaTeX}
 
 \begin{frame}
   \frametitle{¿Qué es \LaTeX?}
@@ -88,17 +89,25 @@
 \begin{frame}
   \frametitle{¿Por qué usar \LaTeX?}
   \begin{itemize}
-    \item Formatos estables y compatibles
-    \begin{itemize}
-      \item En Word existen .doc y .docx, incompatibles entre sí
-      \item Incluso si se utilizan distintas versiones de Word
-    \end{itemize}
+    \item Control flexible del contenido
     \item Fórmulas matemáticas de alta calidad
-    \item Extensible con multitud de paquetes
     \item Permite centrarse en el contenido, no en la presentación
+    \item Extensible con multitud de paquetes
     \begin{itemize}
       \item La presentación se puede cambiar con multitud de plantillas
     \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{¿Para qué usar \LaTeX?}
+  \begin{itemize}
+    \item Trabajos prácticos
+    \item Documentos con fórmulas matemáticas
+    \item Tesis, papers
+    \item Currículum Vitae
+    \item Presentaciones
+    \item Partituras (!)
   \end{itemize}
 \end{frame}
 
@@ -109,7 +118,7 @@
   \begin{itemize}
     \item Linux: TeX Live
     \item Windows: MiKTeX
-    \item MacOS: MacTex
+    \item OSX (Mac): MacTex
   \end{itemize}
 
   Editor de texto
@@ -131,6 +140,9 @@
   \end{itemize}
 \end{frame}
 
+\section{Uso de \LaTeX}
+
+\subsection{Conceptos básicos}
 \begin{frame}
   \frametitle{¡Hola Mundo!}
   \lstinputlisting[style=latex]{hola-mundo/hola-mundo.tex}
@@ -240,5 +252,117 @@
     \item Para usar \texttt{babel} o indicar idiomas puede requerir instalar paquetes en la distribución \LaTeX
   \end{itemize}
 \end{frame}
+
+\subsection{Fórmulas matemáticas}
+\begin{frame}
+  \frametitle{Escribiendo fórmulas matemáticas}
+  \begin{itemize}
+    \item Sintáxis específica
+    \item Sólo hay que indicar que vamos a escribir fórmulas
+    \begin{itemize}
+     \item inline (junto con texto)
+     \item en una nueva línea
+    \end{itemize}
+   \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fórmulas matemáticas: Ejemplos}
+  \only<1> {\lstinputlisting[style=latex]{matematicas/matematicas.tex}}
+  \only<2> {Sean $ \alpha, \beta \in \mathbb{R} $\begin{equation*} \alpha + \beta = \beta + \alpha\end{equation*} }      
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fórmulas matemáticas: Ejemplos}
+  Sumatorias
+  {\lstinputlisting[style=latex]{matematicas/sumatoria.tex}}
+  \begin{center}
+    $\sum_{i=0}^{n} a_ix^i$   
+  \end{center}\pause
+  Integrales
+  {\lstinputlisting[style=latex]{matematicas/integral.tex}}
+  \begin{center}
+    $\int_{a}^{b} x^2 dx$   
+  \end{center}\pause
+  Límites
+  {\lstinputlisting[style=latex]{matematicas/limite.tex}}
+  \begin{center}
+    $\lim_{x\to\infty} f(x)$  
+  \end{center}\pause
+
+\end{frame}
+
+\subsection{Gráficos}
+
+\begin{frame}
+  \frametitle{}
+\end{frame}
+
+
+\subsection{Código}
+
+\begin{frame}
+  \frametitle{Ventajas}
+  \begin{itemize}
+   \item Formato agradable a la vista
+   \begin{itemize}
+    \item Syntax highlighting
+    \item Personalización de estilos (números de líneas, colores)
+   \end{itemize}
+   \item ¡Posibilidad de importar código fuente desde otros archivos!
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Incluyendo código en el documento}
+  \begin{columns}
+    \column{0.55\textwidth}\centering
+      \lstinputlisting[style=latex, firstline=1, lastline=9]{codigo/importar-listings.tex}
+    \column{0.45\textwidth}\centering
+      \begin{itemize}
+        \item Hay que importar el paquete \texttt{listings}
+        \item Se puede personalizar el estilo del código (importar \texttt{color})
+        \item También el tamaño de los tabs
+        \item Y muchas cosas más...
+      \end{itemize}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Incluyendo código en el documento}
+  \framesubtitle{Uso básico}
+  \lstinputlisting[style=latex, firstline=13, lastline=15]{codigo/importar-listings.tex}
+  Da como resultado:
+  \begin{lstlisting}
+  print("Hola mundo!")
+  \end{lstlisting}\pause
+  \emph{¡Lo estuvimos usando todo el tiempo!}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Incluyendo código en el documento}
+  \framesubtitle{Personalizando un poco más}
+  \lstinputlisting[style=latex, firstline=17, lastline=23]{codigo/importar-listings.tex}
+  Da como resultado:
+\begin{lstlisting}[language=python]
+  def main():
+    """Saluda al mundo"""
+    print("Hola mundo")
+  
+  main()
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Incluyendo código en el documento}
+  \framesubtitle{Importando un archivo con código}
+  Indicamos el nombre del archivo a mostrar:
+  \lstinputlisting[style=latex, firstline=25, lastline=25]{codigo/importar-listings.tex}\pause
+  Podemos incluir sólo algunas líneas:
+  \lstinputlisting[style=latex, firstline=26, lastline=26]{codigo/importar-listings.tex}
+
+\end{frame}
+
 
 \end{document}
