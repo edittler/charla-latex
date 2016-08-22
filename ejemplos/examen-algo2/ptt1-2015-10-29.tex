@@ -1,0 +1,244 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\selectlanguage{spanish}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{listings}
+\setcounter{secnumdepth}{0}
+% Page layout (geometry)
+\usepackage[a4paper,headheight=0cm,scale={0.7,0.8},hoffset=0.cm,left=2cm,right=2cm,top=2cm, bottom = 3cm]{geometry}
+
+%seccion de definiciones
+\newcommand{\subsubsubsection}[1]{ \textbf{#1} \\}
+
+\newcommand{\tabladeconstantes}[4]{
+ \renewcommand{\tabcolsep}{0.3em}
+ \begin{longtable}{ccc}
+  \hline
+  $ID_{int}$ & $ID_{enum}$ & $ID_{ext}$ & Valor \\
+  \hline
+ \endfirsthead
+  #1
+  \hline
+  $ID_{int}$ & $ID_{ext}$ & Valor \\
+  \hline
+ \endhead
+  \hline
+  #2
+  \hline
+ \caption{Tabla de Registros#3}
+ \label{#4}
+ \end{longtable}
+}
+
+\newcommand{\tabladeenumerados}[4]{
+ \renewcommand{\tabcolsep}{0.3em}
+ \begin{longtable}{|c|c|c|c|c|}
+  \hline
+  $ID_{int}$ & $ID_{ext}$ & $L_i/L_s$ & Base & Tamaño \\
+  \hline
+ \endfirsthead
+  #1
+  \hline
+  $ID_{int}$ & $ID_{ext}$ & $L_i/L_s$ & Base & Tamaño \\
+  \hline
+ \endhead
+  \hline
+  #2
+  \hline
+ \caption{Tabla de Enumerados#3}
+ \label{#4}
+ \end{longtable}
+}
+
+\newcommand{\tabladearreglos}[4]{
+ \renewcommand{\tabcolsep}{0.3em}
+ \begin{longtable}{|c|c|c|c|c|c|c|}
+  \hline
+  $ID_{int}$ & $ID_{ext}$ & $L_i/L_s$ & Elementos & Base & Tamaño & Dimensión \\
+  \hline
+ \endfirsthead
+  #1
+  \hline
+  $ID_{int}$ & $ID_{ext}$ & $L_i/L_s$ & Elementos & Base & Tamaño & Dimensión \\
+  \hline
+ \endhead
+  \hline
+  #2
+  \hline
+ \caption{Tabla de Arreglos#3}
+ \label{#4}
+ \end{longtable}
+}
+
+\newcommand{\tabladeregistros}[4]{
+ \renewcommand{\tabcolsep}{0.3em}
+ \begin{longtable}{|c|c|c|c|c|c|c|}
+  \hline
+  $ID_{int}$ & $ID_{ext}$ & $ID_{dat}$ & Base & Tamaño & Offset & Total \\
+  \hline
+ \endfirsthead
+  #1
+  \hline
+  $ID_{int}$ & $ID_{ext}$ & $ID_{dat}$ & Base & Tamaño & Offset & Total \\
+  \hline
+ \endhead
+  \hline
+  #2
+  \hline
+ \caption{Tabla de Registros#3}
+ \label{#4}
+ \end{longtable}
+}
+
+\newcommand{\tabladevariables}[4]{
+ \renewcommand{\tabcolsep}{0.3em}
+ \begin{longtable}{|c|c|c|c|c|}
+  \hline
+  $ID_{int}$ & $ID_{ext}$ & Base & Tamaño & Offset \\
+  \hline
+ \endfirsthead
+  #1
+  \hline
+  $ID_{int}$ & $ID_{ext}$ & Base & Tamaño & Offset \\
+  \hline
+ \endhead
+  \hline
+  #2
+  \hline
+ \caption{Tabla de variables#3}
+ \label{#4}
+ \end{longtable}
+}
+\title{Parcial Teórico}
+\date{2015-10-29}
+\pagestyle{empty}
+
+
+\begin{document}
+
+\section{Algoritmos y Programacion II -- Catedra Lic. Gustavo Carolo \\ Evaluacion Parcial -- 2015-10-29}
+\renewcommand{\arraystretch}{1.5}
+\noindent\begin{tabular}{p{7.9cm}@{}p{2cm}r}
+\multicolumn{2}{c}{-- Entregar teoría y práctica por separado --} & \multirow{3}{*}{\begin{tabular}{|c|c|c|c|c|c|c|c|c||c|}
+\hline
+a & b & c & d & e & f & g & h & i & T\\
+\hline
+% & & \backslashbox{}{} & & & & & \\
+ & & & & & & & & & \\
+\hline
+\end{tabular}} \\
+\multicolumn{2}{l}{Nombre: \dotfill {} }\\
+Mail: \dotfill {} Padrón: & \dotfill \\
+\end{tabular}
+
+\subsection{Teor\'ia Tema 1}
+
+\renewcommand{\baselinestretch}{0.9}
+
+Dado el siguiente código:
+
+\lstset{language=C, basicstyle=\scriptsize\sl, numbers=left,tabsize=2, stepnumber=5, numbersep=5pt, keywordstyle=\scriptsize\bf,identifierstyle=\scriptsize\tt, xleftmargin=2cm,basewidth={0.57em,0.57em}}
+\lstinputlisting{ptt1-2015-10-29.c}
+
+Asuma que:
+\begin{itemize}
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+  %\item {Se está compilando en una arquitectura de 32 bits (4 bytes) por palabra.}
+ %\item {Se está compilando en una arquitectura de 128 bits (16 bytes) por palabra.}
+ \item {Se está compilando en una arquitectura de 64 bits (8 bytes) por palabra.}
+ %\item {Un {\bf char} ocupa 8 bits; un {\bf short} ocupa 16 bits; un {\bf double} ocupa 64 bits; el resto de los tipos elementales ocupa 32 bits.}
+ \item {Un {\bf char} ocupa 8 bits; un {\bf short} ocupa 16 bits; un {\bf float} ocupa 32 bits; el resto de los tipos elementales ocupa 64 bits.}
+ %\item {Un {\bf char} ocupa 8 bits; un {\bf short} ocupa 16 bits; un {\bf float} ocupa 64 bits; el resto de los tipos elementales ocupa 128 bits.}
+ \item {El compilador ordena las variables en el orden dado y no las serializa (deja espacios en desuso).}
+ \item {Las variables \verb!argc! y \verb!argv! en \verb!main! no son necesarias.}
+ \item {La memoria siempre se aloca y \verb!malloc! nunca devuelve \verb!NULL!.}
+\end{itemize}
+
+Se pide:
+
+\renewcommand\theenumi{\alph{enumi}}
+\renewcommand\theenumii{\roman{enumii}}
+\begin{enumerate}
+ \setlength{\itemsep}{1pt}
+ \item {Utilice un diagrama adecuado para justificar el seguimiento recursivo de la función \verb!func! e indique la salida que imprime.}
+ \item {¿Cuál es el orden de recursividad de la función \verb!func!? ¿es directa o indirecta? ¿Cuál es la condición de corte?}
+ \item {Divida con barras los distintos lexemas la función \verb!func! de la misma forma en que lo haría el {\it scanner}. Indique cual es la cadena que no es procesada como tal por el {\it scanner}.}
+ \item {El analizador sintáctico define un operador ternario (es decir que recibe tres parámetros), ¿cómo se utliza? ¿conoce operadores unarios?}
+ \item {Complete en bytes las tablas del compilador y la de variables para la función \verb!main!. Ignore las tablas de constantes y enumerados.}
+ \item {Responda cuántos bytes habría entre \verb!a->attributes[10].value[-67]! y \verb!a->number.id_jedi!. Justifique la cuenta. No analice violaciones de segmentos.}
+ \item {Muestre en un diagrama como quedaran los punteros en memoria. Indique a que parte de la memoria
+pertenece cada bloque (recuerde incluir todas las variables, incluso aquellas que no se utilicen; \verb!argv! y
+\verb!argc! pueden ser ignoradas). Indique todos los datos que no fueron inicializados. Muestre el resultado que sale al ejecutarse la impresión del \verb!printf! de la línea 45.}
+ \item {¿Es posible liberar toda la memoria en el caso anterior? Escriba el código que intente liberar la mayor cantidad posible de memoria (o toda si contesto afirmativamente a la pregunta anterior).}
+ \item {Indicar si en el caso anterior las siguientes expresiones compilan y en caso de hacerlo, un identificador interno o externo tipo:
+  \begin{enumerate}
+   \item {\verb!*((*a).next->firstname)!}
+   \item {\verb!&((*b).number)!}
+   \item {\verb!*(c->prior-7)!}
+  \end{enumerate}
+ }
+\end{enumerate}
+
+\renewcommand{\arraystretch}{1}
+{ \footnotesize
+%\tabladeenumerados{}{
+%&&&&\\
+%\hline
+%&&&&\\
+%}{}{}
+\tabladevariables{}{
+&&&&\\
+\hline
+&&&&\\
+\hline
+&&&&\\
+\hline
+&&&&\\
+}{}{}
+\tabladearreglos{}{
+&&&&&&\\
+\hline
+&&&&&&\\
+}{}{}
+\tabladeregistros{}{
+&&&&&&\\
+\cline{3-6}
+&&&&&&\\
+\cline{3-6}
+&&&&&&\\
+\cline{3-6}
+&&&&&&\\
+\cline{3-6}
+&&&&&&\\
+\cline{3-6}
+&&&&&&\\
+\cline{3-6}
+&&&&&&\\
+\cline{3-6}
+&&&&&&\\
+\cline{3-6}
+&&&&&&\\
+\cline{3-6}
+&&&&&&\\
+\cline{3-6}
+&&&&&&\\
+\cline{3-6}
+&&&&&&\\
+\cline{3-6}
+&&&&&&\\
+\cline{3-6}
+&&&&&&\\
+\cline{3-6}
+&&&&&&\\
+\cline{3-6}
+&&&&&&\\
+}{}{}
+}
+
+
+\end{document}
+

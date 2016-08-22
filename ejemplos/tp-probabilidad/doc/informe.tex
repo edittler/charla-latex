@@ -1,0 +1,167 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc} % para poder usar tildes en archivos UTF-8
+\usepackage[spanish]{babel} % para que comandos como \today den el resultado en castellano
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor} % Colores
+\usepackage[pdftex]{graphicx} % Permite incluir gráficos
+\usepackage[hang, bf]{caption} % Personaliza los subtítulos de las figuras y tablas
+\usepackage{float} % Permite posicionar mejor las figuras y tablas
+\usepackage{listings} % Permite insertar código fuente
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.5.1}
+
+\definecolor{darkblue}{rgb}{0,0,0.4}
+\definecolor{darkgreen}{rgb}{0,0.4,0}
+
+\lstset{ % Elijo formato de bloques de código fuente
+  backgroundcolor=\color{gray!5},
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  commentstyle=\color{darkgreen},
+  extendedchars=true,
+  frame=single,
+  language=octave,
+  literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ñ}{{\~n}}1, % Escapeo caracteres especiales
+  keywordstyle=\color{darkblue},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  tabsize=4,
+  showspaces=false,
+  showstringspaces=false,
+  stringstyle=\color{red}
+}
+
+\begin{document}
+
+\begin{titlepage}
+  \centering
+  \includegraphics[width=0.6\textwidth]{logo_fiuba.pdf}\par\vspace{1cm}
+  {\scshape\LARGE Universidad de Buenos Aires \par}
+  {\scshape\LARGE Facultad de Ingeniería \par}
+  \vspace{1cm}
+  {\scshape\Large 61.09 Probabilidad y Estadística B\par}
+  {\scshape\Large Curso 27\par}
+  \vspace{1.5cm}
+  {\huge\bfseries Método Monte Carlo\par}
+  \vspace{2cm}
+  {\Large\itshape Nombre y Apellido \par}
+  {\Large\itshape Padrón 100.000 \par}
+
+  \vfill
+
+  % Bottom of the page
+  {\large \today\par}
+\end{titlepage}
+
+\newpage
+
+\section*{Enunciado}
+Sea $f: \mathbb{R} \to \mathbb{R}$ una función continua y no negativa.
+Sea $M > 0$ el valor máximo de la función $f$ sobre el intervalo $[a, b]$. \\
+
+(a) Se elige al azar un punto de coordenadas $(X, Y)$ dentro del rectángulo de
+vértices $(a, 0)$, $(b, 0)$, $(b, M)$, $(a, M)$. Relacionar la probabilidad
+del evento $A = \{ Y \leqslant f(X) \}$ con el valor de la integral
+$\int\limits_a^b f(x) dx$. \\
+
+(b) Si se conoce el valor de la probabilidad, $P(A)$, del evento
+$A = \{ Y \leqslant f(X) \}$, ¿cómo se calcula la integral
+$\int\limits_a^b f(x) dx$? \\
+
+(c) Obtener un método que permita estimar el valor de la integral
+$\int\limits_a^b f(x) dx$ en base a los resultados de $n$ simulaciones del
+experimento descrito en Inciso (a). \\
+
+(d) Estimar el valor de la integral $\int\limits_0^2 e^{-x^{2}} dx$ utilizando
+el método obtenido en Inciso (c) basándose en los resultados de 10000
+simulaciones.
+
+\newpage
+\section*{Resolución}
+\subsection*{Inciso (a)}
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        xlabel={$X$},
+        ylabel={$Y$},
+        axis x line=bottom,
+        axis y line=left,
+        enlarge x limits=true,
+        enlarge y limits=true,
+        xmin=0.18, xmax=2,
+        ymin=0.09, ymax=1,
+        %symbolic x coords={a,b},
+        area style,
+        legend cell align=left,
+        legend pos=outer north east
+      ]
+      \addplot coordinates {(0,1) (2,1)} \closedcycle;
+      \addplot {e^(-x^2)};
+      \legend{$\Omega$,$A$}
+    \end{axis}
+  \end{tikzpicture}
+  %\caption{Rectángulo de vértices $(a, 0)$, $(b, 0)$, $(b, M)$, $(a, M)$ con $a=0$, $b=2$, $M=1$}
+\end{figure}
+
+\[
+  P(A) = P( Y \leqslant f(X) ) = \frac{ area(A) }{ area(\Omega) } =
+  \frac{ \int\limits_a^b f(x) dx }{ (b-a) . M }
+\]
+
+\subsection*{Inciso (b)}
+
+Siendo $P(A)$ conocido, se puede estimar el valor de la integral
+$\int\limits_a^b f(x) dx$ del siguiente modo
+
+\[
+  \int\limits_a^b f(x) dx = P(A).(b-a) . M
+\]
+
+\subsection*{Inciso (c)}
+Siendo conocidos los valores de $a$, $b$, $M$ y conocida la función $f(x)$,
+se puede estimar el valor de la integral $\int\limits_a^b f(x) dx$ obteniendo
+un valor estimado de $P(A)$, $A = \{ Y \leqslant f(X) \}$. \\
+
+Para ello, se genera un vector aleatorio $(X,Y)$ y se verifica si forma
+parte del evento $A$, es decir, si $Y \leqslant f(X)$. Repitiendo varias veces
+la simulación se puede obtener un mejor valor de $P(A)$. \\
+
+Siendo $n$ la cantidad de simulaciones, la probabilidad se puede estimar de la 
+siguiente forma:
+
+\[
+  P(A) = \frac{ \#\{
+      i \, \epsilon \{ 1, \dots, n \} : y_i \leqslant f(x_i) \}
+    }{ n }
+\]
+
+\newpage
+\subsection*{Inciso (d)}
+Se desea el valor de $\int\limits_0^2 e^{-x^2} dx$ utilizando el método,
+basándose en resultados de 10000 simulaciones.
+De la integral se pueden extraer los siguientes datos:
+
+\begin{itemize}
+\item $a = 0$
+\item $b = 2$
+\item $M = 1$
+\item $f(x) = e^{-x^2}$
+\end{itemize}
+~\\
+
+Se diseñó el siguiente algoritmo en Octave:
+
+\lstinputlisting[
+    caption={Algoritmo Monte Carlo en Octave},
+    label={lst:monte_carlo}
+  ]{../src/monte_carlo.m}
+~\\
+
+Corriendo el algoritmo, se obtuvo el valor 0.88460.
+Siendo el valor analítico de la integral 0.88208, se puede concluir que el
+método Monte Carlo aproxima bastante al valor analítico.
+
+\end{document}
